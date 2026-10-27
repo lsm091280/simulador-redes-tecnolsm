@@ -246,3 +246,9 @@ table.tabla { border-collapse: collapse; width: 100%; font-family: var(--f-mono)
 
 /* Enlaces de ruta alternativa: magenta */
 .enlace.ruta-alt { stroke: var(--magenta); stroke-width: 3; stroke-dasharray: 4 3; }
+
+/* ---------- Logo real tecnoLSM ---------- */
+.marca-logo-img {
+  width: 40px; height: 40px; border-radius: 8px;
+  object-fit: cover; flex-shrink: 0;
+}
