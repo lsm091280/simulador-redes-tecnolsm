@@ -3,6 +3,7 @@
   --paper: #0B111E; --ink: #DDEAF0; --muted: #94A9B8; --rule: #2A3444; --accent: #68D7E8;
   --card: #111A2B; --ok: #5BE3A0; --err: #FF7A8A; --warn: #F2C45C; --on-accent: #0B111E;
   --term-bg: #060A13; --term-ink: #CFE8EF;
+  --copper: #C58B62; --magenta: #E27AB3;
   --f-titulo: 'Space Grotesk', system-ui, sans-serif;
   --f-cuerpo: 'DM Sans', system-ui, sans-serif;
   --f-mono: 'IBM Plex Mono', ui-monospace, Menlo, Consolas, monospace;
@@ -12,12 +13,14 @@
   --paper: #0B111E; --ink: #DDEAF0; --muted: #94A9B8; --rule: #2A3444; --accent: #68D7E8;
   --card: #111A2B; --ok: #5BE3A0; --err: #FF7A8A; --warn: #F2C45C; --on-accent: #0B111E;
   --term-bg: #060A13; --term-ink: #CFE8EF;
+  --copper: #C58B62; --magenta: #E27AB3;
   color-scheme: dark;
 }
 [data-theme="light"] {
   --paper: #F4F7F9; --ink: #0B111E; --muted: #4A5D6E; --rule: #C9D3DB; --accent: #0A7385;
   --card: #FFFFFF; --ok: #0B7A46; --err: #B3263A; --warn: #8A6100; --on-accent: #FFFFFF;
   --term-bg: #0B111E; --term-ink: #DDEAF0;
+  --copper: #8A5530; --magenta: #A8307B;
   color-scheme: light;
 }
 
@@ -220,3 +223,26 @@ table.tabla { border-collapse: collapse; width: 100%; font-family: var(--f-mono)
   .rejilla { display: block; }
   .tarjeta { break-inside: avoid; margin-bottom: 1rem; }
 }
+
+/* ---------- Paleta completa tecnoLSM: cobre, magenta, verde, ámbar, rojo ---------- */
+/* Nodos de tipo router: cobre (fabricación/oficio) */
+.nodo.router .forma { stroke: var(--copper); }
+.nodo.router .pantalla { fill: var(--copper); }
+.nodo.router .trazo { stroke: var(--copper); }
+.nodo.router .puerto { fill: var(--copper); }
+
+/* Hover en botones secundarios: magenta (énfasis puntual) */
+.btn-secundario:hover { border-color: var(--magenta); color: var(--magenta); }
+
+/* Paquetes de respuesta: magenta (énfasis) */
+.paquete.respuesta { fill: var(--magenta); }
+
+/* Mensajes de éxito: verde (ya usa --ok) */
+/* Mensajes de error: rojo (ya usa --err) */
+/* Warnings: ámbar (ya usa --warn) */
+
+/* Chips de conceptos: cobre */
+.chip-concepto { border-color: var(--copper); color: var(--copper); }
+
+/* Enlaces de ruta alternativa: magenta */
+.enlace.ruta-alt { stroke: var(--magenta); stroke-width: 3; stroke-dasharray: 4 3; }
