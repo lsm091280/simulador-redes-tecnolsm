@@ -98,7 +98,7 @@ input[aria-invalid="true"] { border-color: var(--err); }
 .chip { font-family: var(--f-mono); font-size: .8rem; font-weight: 500; border: 1px solid var(--accent); color: var(--accent); border-radius: 999px; padding: .1rem .6rem; margin-left: .4rem; }
 
 /* SVG */
-.svg-red { width: 100%; height: auto; border: 1px dashed var(--rule); border-radius: 8px; background: var(--paper); touch-action: none; }
+.svg-red { width: 100%; height: auto; max-height: 460px; border: 1px dashed var(--rule); border-radius: 8px; background: var(--paper); touch-action: none; }
 .enlace { stroke: var(--rule); stroke-width: 3; stroke-linecap: round; transition: stroke .2s; }
 .enlace.ruta { stroke: var(--accent); stroke-width: 4; }
 .enlace.ruta-error { stroke: var(--err); stroke-width: 4; stroke-dasharray: 6 5; }
