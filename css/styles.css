@@ -258,3 +258,10 @@ table.tabla { border-collapse: collapse; width: 100%; font-family: var(--f-mono)
 /* ---------- Alineación vertical logo + título ---------- */
 .cabecera .marca { align-items: center; }
 .cabecera .marca h1 { margin: 0; line-height: 1; }
+
+/* ---------- Footer wordmark (como OhmLab) ---------- */
+.pie .footer-wordmark {
+  font: 600 1.35rem/1 var(--f-titulo); color: var(--ink);
+  letter-spacing: -.01em; margin-bottom: .4rem;
+}
+.pie .footer-wordmark b { color: var(--accent); font-weight: 600; }
