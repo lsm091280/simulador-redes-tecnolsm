@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="es" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simulador de redes · tecnoLSM</title>
+  <meta name="description" content="Simulador de redes informáticas para Digitalización 4º ESO: topologías, direccionamiento IP, subredes, DNS, DHCP, ping y traceroute.">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('tecnolsm-theme');
+        if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+      } catch (e) { /* sin localStorage */ }
+    })();
+  </script>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <a class="saltar" href="#principal">Saltar al contenido</a>
+
+  <header class="cabecera">
+    <div class="marca">
+      <span class="marca-logo" aria-hidden="true">LSM</span>
+      <div>
+        <h1>Simulador de redes</h1>
+        <p class="subtitulo">Digitalización · 4º ESO</p>
+      </div>
+    </div>
+    <div class="cabecera-controles">
+      <label for="sel-topologia" class="etiqueta-inline">Topología</label>
+      <select id="sel-topologia" aria-describedby="resumen-topologia"></select>
+      <button type="button" id="btn-tema" class="btn btn-icono" aria-label="Cambiar entre tema claro y oscuro" title="Cambiar tema">
+        <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/><path d="M12 1v3M12 20v3M1 12h3M20 12h3M4.2 4.2l2.1 2.1M17.7 17.7l2.1 2.1M4.2 19.8l2.1-2.1M17.7 6.3l2.1-2.1" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+  </header>
+
+  <div id="aviso-datos" class="aviso-global" role="alert" hidden></div>
+
+  <main id="principal" class="rejilla">
+    <section class="tarjeta area-diagrama" aria-labelledby="t-diagrama">
+      <h2 id="t-diagrama">Diagrama de la red</h2>
+      <div id="resumen-topologia" class="resumen" aria-live="polite"></div>
+      <svg id="svg-red" class="svg-red" preserveAspectRatio="xMidYMid meet"></svg>
+      <div class="leyenda" aria-hidden="true">
+        <span><i class="pto pto-nodo"></i> Equipo</span>
+        <span><i class="pto pto-enlace"></i> Cable</span>
+        <span><i class="pto pto-paquete"></i> Paquete</span>
+        <span class="muted">Arrastra los equipos para reorganizarlos · clic para seleccionar</span>
+      </div>
+      <div class="fila-botones">
+        <button type="button" class="btn" id="btn-reset-pos">Reordenar nodos</button>
+      </div>
+    </section>
+
+    <section class="tarjeta area-consola" aria-labelledby="t-consola">
+      <h2 id="t-consola">Consola <span class="chip" id="chip-nodo">—</span></h2>
+      <div id="terminal" class="terminal"></div>
+      <div class="fila-botones">
+        <button type="button" class="btn" data-cmd="ping 192.168.1.1">ping router</button>
+        <button type="button" class="btn" data-cmd="tracert 8.8.8.8">tracert 8.8.8.8</button>
+        <button type="button" class="btn" data-cmd="ipconfig">ipconfig</button>
+        <button type="button" class="btn" data-cmd="nslookup google.com">nslookup</button>
+        <button type="button" class="btn" data-cmd="arp -a">arp -a</button>
+      </div>
+    </section>
+
+    <aside class="tarjeta area-panel" aria-label="Herramientas">
+      <div class="pestanas" role="tablist" aria-label="Herramientas del simulador">
+        <button role="tab" id="tab-config" aria-controls="p-config" aria-selected="true" type="button">Configuración</button>
+        <button role="tab" id="tab-calc" aria-controls="p-calc" aria-selected="false" tabindex="-1" type="button">Subredes</button>
+        <button role="tab" id="tab-conceptos" aria-controls="p-conceptos" aria-selected="false" tabindex="-1" type="button">Conceptos</button>
+        <button role="tab" id="tab-ejemplos" aria-controls="p-ejemplos" aria-selected="false" tabindex="-1" type="button">Ejemplos</button>
+        <button role="tab" id="tab-examen" aria-controls="p-examen" aria-selected="false" tabindex="-1" type="button">Examen</button>
+        <button role="tab" id="tab-archivo" aria-controls="p-archivo" aria-selected="false" tabindex="-1" type="button">Archivo</button>
+      </div>
+
+      <!-- Configuración -->
+      <div role="tabpanel" id="p-config" aria-labelledby="tab-config" class="panel">
+        <h2>Configuración de red</h2>
+        <p class="nota" id="config-nodo">Selecciona un equipo en el diagrama.</p>
+        <form id="form-config" novalidate class="form-rejilla">
+          <label for="cfg-ip">Dirección IP</label>
+          <input type="text" id="cfg-ip" class="mono" autocomplete="off" spellcheck="false" placeholder="192.168.1.10">
+          <label for="cfg-mask">Máscara de subred</label>
+          <input type="text" id="cfg-mask" class="mono" autocomplete="off" spellcheck="false" placeholder="255.255.255.0 o /24">
+          <label for="cfg-gw">Puerta de enlace (gateway)</label>
+          <input type="text" id="cfg-gw" class="mono" autocomplete="off" spellcheck="false" placeholder="192.168.1.1">
+          <label for="cfg-dns">Servidor DNS</label>
+          <input type="text" id="cfg-dns" class="mono" autocomplete="off" spellcheck="false" placeholder="8.8.8.8">
+        </form>
+        <div id="config-mensajes" class="mensajes" aria-live="polite"></div>
+        <div class="fila-botones">
+          <button type="button" class="btn btn-primario" id="btn-aplicar">Aplicar configuración</button>
+          <button type="button" class="btn" id="btn-restaurar">Restaurar configuración original</button>
+        </div>
+      </div>
+
+      <!-- Calculadora -->
+      <div role="tabpanel" id="p-calc" aria-labelledby="tab-calc" class="panel" hidden>
+        <h2>Calculadora de subredes</h2>
+        <form id="form-calc" novalidate class="form-rejilla">
+          <label for="calc-ip">IP de red</label>
+          <input type="text" id="calc-ip" class="mono" value="192.168.1.0" autocomplete="off" spellcheck="false">
+          <label for="calc-mask">Máscara o prefijo</label>
+          <input type="text" id="calc-mask" class="mono" value="/24" autocomplete="off" spellcheck="false" placeholder="/24 o 255.255.255.0">
+          <label for="calc-n">Dividir en N subredes</label>
+          <input type="number" id="calc-n" class="mono" min="1" max="1024" value="4">
+        </form>
+        <div class="fila-botones">
+          <button type="button" class="btn btn-primario" id="btn-calc">Calcular</button>
+          <button type="button" class="btn" id="btn-dividir">Dividir en N subredes</button>
+        </div>
+        <div id="calc-salida" class="calc-salida" aria-live="polite"></div>
+      </div>
+
+      <!-- Conceptos -->
+      <div role="tabpanel" id="p-conceptos" aria-labelledby="tab-conceptos" class="panel" hidden>
+        <h2>Conceptos clave</h2>
+        <div id="lista-conceptos"></div>
+      </div>
+
+      <!-- Ejemplos -->
+      <div role="tabpanel" id="p-ejemplos" aria-labelledby="tab-ejemplos" class="panel" hidden>
+        <h2>Ejemplos guiados</h2>
+        <ol id="lista-ejemplos" class="lista-ejemplos"></ol>
+        <div id="ejemplo-pasos" class="ejemplo-pasos" aria-live="polite"></div>
+      </div>
+
+      <!-- Examen -->
+      <div role="tabpanel" id="p-examen" aria-labelledby="tab-examen" class="panel" hidden>
+        <h2>Modo examen</h2>
+        <div id="examen-contenedor"></div>
+        <div class="fila-botones"><button type="button" class="btn" id="btn-reiniciar-examen">Reiniciar examen</button></div>
+      </div>
+
+      <!-- Archivo -->
+      <div role="tabpanel" id="p-archivo" aria-labelledby="tab-archivo" class="panel" hidden>
+        <h2>Exportar / importar</h2>
+        <p class="nota">Guarda tu red (topología, posiciones y configuración IP) en un archivo .json y cárgala más tarde. Tu trabajo también se guarda como borrador en este navegador.</p>
+        <div class="fila-botones columna">
+          <button type="button" class="btn" id="btn-exportar">Exportar configuración (.json)</button>
+          <button type="button" class="btn" id="btn-importar">Importar configuración</button>
+          <input type="file" id="archivo-importar" accept="application/json,.json" hidden>
+          <button type="button" class="btn" id="btn-exportar-ping">Exportar resultados de ping (.txt)</button>
+          <button type="button" class="btn" id="btn-descartar">Descartar borrador y recargar topología</button>
+        </div>
+        <div id="archivo-msg" class="mensajes" aria-live="polite"></div>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="pie">
+    <p>Aplicación creada por Tecno LSM para uso educativo © 2026 Licencia libre de uso no comercial (Creative Commons BY-NC-SA 4.0).</p>
+  </footer>
+  <div class="watermark" aria-hidden="true">tecnoLSM · Simulador de redes</div>
+
+  <script src="js/red-engine.js"></script>
+  <script src="js/diagrama-red.js"></script>
+  <script src="js/consola.js"></script>
+  <script src="js/ejemplos.js"></script>
+  <script src="js/examenes.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

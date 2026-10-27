@@ -1,0 +1,426 @@
+{
+  "nombre": "Simulador de redes informáticas — datos de ejemplo",
+  "topologias": [
+    {
+      "id": "estrella",
+      "nombre": "Estrella (Star)",
+      "descripcion": "Todos los nodos conectados a un switch central. Es la topología más usada en LANs modernas.",
+      "nodos": [
+        {
+          "id": "sw1",
+          "tipo": "switch",
+          "x": 200,
+          "y": 150,
+          "nombre": "Switch central"
+        },
+        {
+          "id": "pc1",
+          "tipo": "pc",
+          "x": 80,
+          "y": 60,
+          "nombre": "PC-1",
+          "ip": "192.168.1.10"
+        },
+        {
+          "id": "pc2",
+          "tipo": "pc",
+          "x": 320,
+          "y": 60,
+          "nombre": "PC-2",
+          "ip": "192.168.1.11"
+        },
+        {
+          "id": "pc3",
+          "tipo": "pc",
+          "x": 80,
+          "y": 240,
+          "nombre": "PC-3",
+          "ip": "192.168.1.12"
+        },
+        {
+          "id": "pc4",
+          "tipo": "pc",
+          "x": 320,
+          "y": 240,
+          "nombre": "PC-4",
+          "ip": "192.168.1.13"
+        },
+        {
+          "id": "router1",
+          "tipo": "router",
+          "x": 200,
+          "y": 320,
+          "nombre": "Router",
+          "ip": "192.168.1.1"
+        }
+      ],
+      "conexiones": [
+        {
+          "from": "sw1",
+          "to": "pc1"
+        },
+        {
+          "from": "sw1",
+          "to": "pc2"
+        },
+        {
+          "from": "sw1",
+          "to": "pc3"
+        },
+        {
+          "from": "sw1",
+          "to": "pc4"
+        },
+        {
+          "from": "sw1",
+          "to": "router1"
+        }
+      ]
+    },
+    {
+      "id": "bus",
+      "nombre": "Bus",
+      "descripcion": "Todos los nodos comparten un mismo cable (backbone). Obsoleta, pero se enseña por su simplicidad conceptual.",
+      "nodos": [
+        {
+          "id": "pc1",
+          "tipo": "pc",
+          "x": 60,
+          "y": 150,
+          "nombre": "PC-1",
+          "ip": "192.168.1.10"
+        },
+        {
+          "id": "pc2",
+          "tipo": "pc",
+          "x": 160,
+          "y": 150,
+          "nombre": "PC-2",
+          "ip": "192.168.1.11"
+        },
+        {
+          "id": "pc3",
+          "tipo": "pc",
+          "x": 260,
+          "y": 150,
+          "nombre": "PC-3",
+          "ip": "192.168.1.12"
+        },
+        {
+          "id": "pc4",
+          "tipo": "pc",
+          "x": 360,
+          "y": 150,
+          "nombre": "PC-4",
+          "ip": "192.168.1.13"
+        }
+      ],
+      "conexiones": [
+        {
+          "from": "pc1",
+          "to": "pc2"
+        },
+        {
+          "from": "pc2",
+          "to": "pc3"
+        },
+        {
+          "from": "pc3",
+          "to": "pc4"
+        }
+      ]
+    },
+    {
+      "id": "anillo",
+      "nombre": "Anillo (Ring)",
+      "descripcion": "Cada nodo se conecta al siguiente formando un círculo. Usada en Token Ring.",
+      "nodos": [
+        {
+          "id": "pc1",
+          "tipo": "pc",
+          "x": 200,
+          "y": 60,
+          "nombre": "PC-1",
+          "ip": "192.168.1.10"
+        },
+        {
+          "id": "pc2",
+          "tipo": "pc",
+          "x": 320,
+          "y": 150,
+          "nombre": "PC-2",
+          "ip": "192.168.1.11"
+        },
+        {
+          "id": "pc3",
+          "tipo": "pc",
+          "x": 260,
+          "y": 280,
+          "nombre": "PC-3",
+          "ip": "192.168.1.12"
+        },
+        {
+          "id": "pc4",
+          "tipo": "pc",
+          "x": 140,
+          "y": 280,
+          "nombre": "PC-4",
+          "ip": "192.168.1.13"
+        },
+        {
+          "id": "pc5",
+          "tipo": "pc",
+          "x": 80,
+          "y": 150,
+          "nombre": "PC-5",
+          "ip": "192.168.1.14"
+        }
+      ],
+      "conexiones": [
+        {
+          "from": "pc1",
+          "to": "pc2"
+        },
+        {
+          "from": "pc2",
+          "to": "pc3"
+        },
+        {
+          "from": "pc3",
+          "to": "pc4"
+        },
+        {
+          "from": "pc4",
+          "to": "pc5"
+        },
+        {
+          "from": "pc5",
+          "to": "pc1"
+        }
+      ]
+    },
+    {
+      "id": "malla",
+      "nombre": "Malla (Mesh)",
+      "descripcion": "Cada nodo se conecta a varios otros. Máxima redundancia, usada en redes críticas.",
+      "nodos": [
+        {
+          "id": "r1",
+          "tipo": "router",
+          "x": 100,
+          "y": 80,
+          "nombre": "Router-1",
+          "ip": "10.0.0.1"
+        },
+        {
+          "id": "r2",
+          "tipo": "router",
+          "x": 300,
+          "y": 80,
+          "nombre": "Router-2",
+          "ip": "10.0.0.2"
+        },
+        {
+          "id": "r3",
+          "tipo": "router",
+          "x": 100,
+          "y": 250,
+          "nombre": "Router-3",
+          "ip": "10.0.0.3"
+        },
+        {
+          "id": "r4",
+          "tipo": "router",
+          "x": 300,
+          "y": 250,
+          "nombre": "Router-4",
+          "ip": "10.0.0.4"
+        }
+      ],
+      "conexiones": [
+        {
+          "from": "r1",
+          "to": "r2"
+        },
+        {
+          "from": "r1",
+          "to": "r3"
+        },
+        {
+          "from": "r1",
+          "to": "r4"
+        },
+        {
+          "from": "r2",
+          "to": "r3"
+        },
+        {
+          "from": "r2",
+          "to": "r4"
+        },
+        {
+          "from": "r3",
+          "to": "r4"
+        }
+      ]
+    }
+  ],
+  "escenarios_ip": [
+    {
+      "id": "ip-basico",
+      "titulo": "Configuración básica de red",
+      "descripcion": "Dado un rango de IPs y una máscara, calcula la dirección de red, broadcast y rango de hosts.",
+      "ip": "192.168.1.0",
+      "mascara": "255.255.255.0",
+      "prefijo": 24,
+      "hosts": 254
+    },
+    {
+      "id": "ip-subred",
+      "titulo": "División en subredes",
+      "descripcion": "Divide una red en subredes de igual tamaño. Calcula cuántas subredes se pueden crear y cuántos hosts por subred.",
+      "ip": "192.168.1.0",
+      "mascara": "255.255.255.0",
+      "subredes": 4,
+      "hosts_por_subred": 62
+    },
+    {
+      "id": "ip-clase-a",
+      "titulo": "Red clase A",
+      "descripcion": "Red de clase A con máscara por defecto. Muchos hosts, pocas redes.",
+      "ip": "10.0.0.0",
+      "mascara": "255.0.0.0",
+      "prefijo": 8,
+      "hosts": 16777214
+    },
+    {
+      "id": "ip-clase-b",
+      "titulo": "Red clase B",
+      "descripcion": "Red de clase B con máscara por defecto. Equilibrio entre redes y hosts.",
+      "ip": "172.16.0.0",
+      "mascara": "255.255.0.0",
+      "prefijo": 16,
+      "hosts": 65534
+    }
+  ],
+  "ejemplos_ping": [
+    {
+      "comando": "ping 192.168.1.1",
+      "resultado": "Respuesta desde 192.168.1.1: bytes=32 tiempo=1ms TTL=64",
+      "explicacion": "El router responde. La red local funciona."
+    },
+    {
+      "comando": "ping 8.8.8.8",
+      "resultado": "Respuesta desde 8.8.8.8: bytes=32 tiempo=15ms TTL=117",
+      "explicacion": "Google DNS responde. Hay conexión a Internet."
+    },
+    {
+      "comando": "ping 192.168.1.254",
+      "resultado": "Tiempo de espera agotado para esta solicitud.",
+      "explicacion": "No hay dispositivo en esa IP. El paquete se pierde."
+    },
+    {
+      "comando": "tracert google.com",
+      "resultado": "1  192.168.1.1 (router)  1ms\n2  10.0.0.1 (ISP)  5ms\n3  8.8.8.8 (Google)  15ms",
+      "explicacion": "El paquete pasa por 3 saltos hasta llegar a Google."
+    }
+  ],
+  "ejemplos": [
+    {
+      "id": "ej1",
+      "titulo": "Topología en estrella",
+      "descripcion": "La más usada en LANs. Todos los nodos conectados a un switch central.",
+      "concepto": "Topología",
+      "topologia": "estrella"
+    },
+    {
+      "id": "ej2",
+      "titulo": "Topología en bus",
+      "descripcion": "Todos comparten un cable. Obsoleta pero conceptualmente simple.",
+      "concepto": "Topología",
+      "topologia": "bus"
+    },
+    {
+      "id": "ej3",
+      "titulo": "Topología en anillo",
+      "descripcion": "Cada nodo se conecta al siguiente formando un círculo.",
+      "concepto": "Topología",
+      "topologia": "anillo"
+    },
+    {
+      "id": "ej4",
+      "titulo": "Topología en malla",
+      "descripcion": "Máxima redundancia. Cada nodo conecta a varios otros.",
+      "concepto": "Topología",
+      "topologia": "malla"
+    },
+    {
+      "id": "ej5",
+      "titulo": "Dirección IP y máscara",
+      "descripcion": "Una IP identifica un dispositivo. La máscara separa la parte de red de la de host.",
+      "concepto": "Direccionamiento IP"
+    },
+    {
+      "id": "ej6",
+      "titulo": "Subredes (subnetting)",
+      "descripcion": "Dividir una red grande en redes más pequeñas para organizar y seguridad.",
+      "concepto": "Subredes"
+    },
+    {
+      "id": "ej7",
+      "titulo": "DNS: traducción de nombres",
+      "descripcion": "DNS convierte nombres de dominio (google.com) en direcciones IP (142.250.185.46).",
+      "concepto": "DNS"
+    },
+    {
+      "id": "ej8",
+      "titulo": "DHCP: asignación automática",
+      "descripcion": "DHCP asigna IPs automáticamente a los dispositivos que se conectan a la red.",
+      "concepto": "DHCP"
+    },
+    {
+      "id": "ej9",
+      "titulo": "Ping: verificar conectividad",
+      "descripcion": "Ping envía paquetes ICMP para comprobar si un dispositivo responde.",
+      "concepto": "Ping"
+    },
+    {
+      "id": "ej10",
+      "titulo": "Traceroute: ver el camino",
+      "descripcion": "Traceroute muestra los saltos que hace un paquete hasta su destino.",
+      "concepto": "Traceroute"
+    }
+  ],
+  "examenes": [
+    {
+      "id": "ex1",
+      "enunciado": "Dibuja una topología en estrella con 4 PCs y un switch. Indica la IP de cada PC (192.168.1.10 a 192.168.1.13) y la del router (192.168.1.1).",
+      "dificultad": "Fácil",
+      "pista": "Todos los PCs se conectan al switch, y el switch al router."
+    },
+    {
+      "id": "ex2",
+      "enunciado": "Calcula la dirección de red, broadcast y rango de hosts para la IP 192.168.1.50 con máscara 255.255.255.0.",
+      "dificultad": "Fácil",
+      "pista": "La máscara /24 significa que los primeros 24 bits son la red."
+    },
+    {
+      "id": "ex3",
+      "enunciado": "Explica qué pasa cuando haces ping a una IP que no existe en la red.",
+      "dificultad": "Fácil",
+      "pista": "El paquete se envía pero nadie responde. Se agota el tiempo de espera."
+    },
+    {
+      "id": "ex4",
+      "enunciado": "¿Qué diferencia hay entre un switch y un router? ¿En qué capa del modelo OSI trabaja cada uno?",
+      "dificultad": "Media",
+      "pista": "El switch trabaja en capa 2 (enlace), el router en capa 3 (red)."
+    },
+    {
+      "id": "ex5",
+      "enunciado": "Divide la red 192.168.1.0/24 en 4 subredes. ¿Cuál es la máscara de cada subred y cuántos hosts tiene cada una?",
+      "dificultad": "Media",
+      "pista": "Para 4 subredes necesitas 2 bits adicionales (2^2=4). La máscara pasa de /24 a /26."
+    }
+  ]
+}
