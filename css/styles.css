@@ -265,3 +265,95 @@ table.tabla { border-collapse: collapse; width: 100%; font-family: var(--f-mono)
   letter-spacing: -.01em; margin-bottom: .4rem;
 }
 .pie .footer-wordmark b { color: var(--accent); font-weight: 600; }
+
+/* ============================================================
+   COLOR POR FUNCIÓN (28/10/2026)
+   cian = red e interacción · cobre = router e infraestructura
+   magenta = switch y evaluación · verde = tráfico correcto
+   ámbar = avisos · rojo = fallo
+   ============================================================ */
+
+/* --- Tarjetas: filete superior del color de su zona --- */
+.tarjeta { --card-accent: var(--accent); border-top: 3px solid var(--card-accent); }
+.area-consola { --card-accent: var(--ok); }
+.area-panel { --card-accent: var(--copper); }
+.tarjeta > h2 { display: flex; align-items: center; gap: .5rem; }
+.tarjeta > h2::before {
+  content: ""; flex: none; width: 4px; height: 1.05em; border-radius: 2px;
+  background: var(--card-accent);
+}
+
+/* --- Nodos del diagrama por tipo de equipo --- */
+.nodo-pc .forma { stroke: var(--accent); }
+.nodo-pc .pantalla { fill: var(--accent); }
+.nodo-pc .trazo { stroke: var(--accent); }
+.nodo-pc .puerto { fill: var(--accent); }
+
+.nodo-switch .forma { stroke: var(--magenta); }
+.nodo-switch .pantalla { fill: var(--magenta); }
+.nodo-switch .trazo { stroke: var(--magenta); }
+.nodo-switch .puerto { fill: var(--magenta); }
+
+.nodo-router .forma { stroke: var(--copper); }
+.nodo-router .pantalla { fill: var(--copper); }
+.nodo-router .trazo { stroke: var(--copper); }
+.nodo-router .puerto { fill: var(--copper); }
+
+.nodo-nombre { font-weight: 700; }
+
+/* --- Leyenda con los colores de cada tipo de equipo --- */
+.pto-pc { border-color: var(--accent); }
+.pto-switch { border-color: var(--magenta); }
+.pto-router { border-color: var(--copper); }
+
+/* --- Pestañas y paneles: color por herramienta --- */
+#tab-config { --tab: var(--accent); }
+#tab-calc { --tab: var(--copper); }
+#tab-conceptos { --tab: var(--ok); }
+#tab-ejemplos { --tab: var(--warn); }
+#tab-examen { --tab: var(--magenta); }
+#tab-archivo { --tab: var(--muted); }
+.pestanas [role="tab"][aria-selected="true"] {
+  color: var(--tab); border-bottom-color: var(--tab);
+  background: color-mix(in srgb, var(--tab) 10%, transparent);
+}
+#p-config > h2 { color: var(--accent); }
+#p-calc > h2 { color: var(--copper); }
+#p-conceptos > h2 { color: var(--ok); }
+#p-ejemplos > h2 { color: var(--warn); }
+#p-examen > h2 { color: var(--magenta); }
+#p-archivo > h2 { color: var(--muted); }
+
+/* --- Datos y énfasis --- */
+.resumen strong { color: var(--copper); }
+.chip { border-color: var(--copper); color: var(--copper); }
+.ej-concepto { color: var(--copper); }
+.calc-datos dd { color: var(--copper); }
+.tabla th { color: var(--copper); }
+.examen-num { color: var(--magenta); }
+.examen-item.activo { border-color: var(--magenta); }
+.term-prompt { color: var(--copper); }
+.msg.ok { border-left-color: var(--ok); }
+.msg.aviso { border-left-color: var(--warn); }
+.msg.aviso strong { color: var(--warn); }
+
+/* --- Hover de botones secundarios: magenta (el primario sigue en cian) --- */
+@media (hover: hover) {
+  .btn:not(.btn-primario):not(:disabled):hover { border-color: var(--magenta); color: var(--magenta); }
+  .examen-item:hover { border-color: var(--magenta); }
+  .tabla tbody tr:hover { background: color-mix(in srgb, var(--accent) 8%, transparent); }
+}
+
+/* --- Terminal: el prompt es "el cable", en cobre --- */
+.term-linea { border-top-color: var(--rule); }
+.terminal::before {
+  content: ""; display: block; height: 2px; background: var(--ok);
+  border-radius: 2px 2px 0 0;
+}
+
+/* --- Al imprimir se fuerza el tema claro: los acentos también --- */
+@media print {
+  :root, [data-theme="dark"], [data-theme="light"] {
+    --copper: #8A5530; --magenta: #A8307B; --ok: #0B7A46; --warn: #8A6100; --err: #B3263A;
+  }
+}
